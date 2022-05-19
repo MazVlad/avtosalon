@@ -1,0 +1,29 @@
+version: '3.3'
+
+services:
+  pythonapp:
+    container_name: pythonapp
+    image: pythonapp
+    build: .
+    command: python3 manage.py runserver 0.0.0.0:8000
+    ports:
+      - "8000:8000"
+
+    depends_on:
+      - db
+
+  db:
+      container_name: db
+      image: postgres:12
+      ports:
+        - "5433:5432"
+      environment:
+        - POSTGRES_PASSWORD=123
+        - POSTGRES_USER=postgres
+        - POSTGRES_DB=avtosalon
+      volumes:
+        - postgres_data:/var/lib/postgresql/data/
+
+volumes:
+  postgres_data:
+
