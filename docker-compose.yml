@@ -20,7 +20,7 @@ services:
       environment:
         - POSTGRES_PASSWORD=123
         - POSTGRES_USER=postgres
-        - POSTGRES_DB=avtosalon
+        - POSTGRES_DB=showroom
       volumes:
         - postgres_data:/var/lib/postgresql/data/
 
