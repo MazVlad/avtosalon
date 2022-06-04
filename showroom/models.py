@@ -40,7 +40,7 @@ class Car(models.Model):
 class Showroom(models.Model):
     name = models.CharField(max_length=100,verbose_name="Название салона")
     location = CountryField(verbose_name="Местоположение")
-    balance = models.DecimalField(decimal_places=2, max_digits=6,verbose_name="Баланс автосалона")
+    balance = models.DecimalField(decimal_places=2, max_digits=6,verbose_name="Баланс автосалона",null=True)
     cars = models.ManyToManyField(Car, blank=True)
     customers = models.ManyToManyField('Customer', blank=True)
     is_active = models.BooleanField(default=True)
@@ -75,7 +75,7 @@ class ShowroomHistory(models.Model):
 
 class Customer(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE,verbose_name="Покупатель")
-    balance = models.FloatField(verbose_name="Баланс")
+    balance = models.FloatField(null=True,verbose_name="Баланс")
     email = models.EmailField(max_length=254,verbose_name="Почта покупателя")
     is_active = models.BooleanField(default=True)
     time_create = models.DateTimeField(auto_now_add=True)

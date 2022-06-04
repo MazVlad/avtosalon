@@ -14,8 +14,23 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path,include
+from showroom.views import *
+from rest_framework import routers
+
+
+router = routers.DefaultRouter()
+router.register(r'car_manufacturer', CarManufacturerViewSet)
+router.register(r'cars', CarViewSet)
+router.register(r'showroom', ShowroomViewSet)
+router.register(r'showroom_discount', ShowroomDiscountViewSet)
+router.register(r'customer', CustomerViewSet)
+router.register(r'user', UserViewSet)
+router.register(r'provider', ProviderViewSet)
+router.register(r'provider_discount', ProviderDiscountViewSet)
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('api/v1/', include(router.urls)),   # http://127.0.0.1:8000/api/v1/showroom/
 ]
