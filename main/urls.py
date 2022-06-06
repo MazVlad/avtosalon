@@ -18,6 +18,9 @@ from django.urls import path,include
 from showroom.views import *
 from rest_framework import routers
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView, TokenVerifyView
+from .yasg import urlpatterns as doc_urls
+from . import settings
+
 
 router = routers.DefaultRouter()
 router.register(r'car_manufacturer', CarManufacturerViewSet)
@@ -37,3 +40,13 @@ urlpatterns = [
     path('api/v1/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     path('api/v1/token/verify/', TokenVerifyView.as_view(), name='token_verify'),
 ]
+
+urlpatterns += doc_urls
+
+
+if settings.DEBUG:
+    import debug_toolbar
+
+    urlpatterns = [
+                      path('__debug__/', include(debug_toolbar.urls)),
+                  ] + urlpatterns
