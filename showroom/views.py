@@ -1,8 +1,10 @@
 from django.shortcuts import render
-from rest_framework import viewsets,mixins
+from rest_framework import viewsets,mixins,filters
 
 from showroom.models import *
 from showroom.seralizers import *
+from django_filters.rest_framework import DjangoFilterBackend
+from showroom.services import CarFilter,ShowroomFilter,ProviderFilter
 
 
 
@@ -23,6 +25,10 @@ class CarViewSet(mixins.ListModelMixin,
                    viewsets.GenericViewSet):
     queryset = Car.objects.all()
     serializer_class = CarSerializer
+    filter_backends = (DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter)
+    filterset_class = CarFilter
+    search_fields = ['car_type']
+    ordering_fields = ['car_type', 'manufacturer']
 
 
 class ShowroomViewSet(mixins.ListModelMixin,
@@ -32,6 +38,10 @@ class ShowroomViewSet(mixins.ListModelMixin,
                     viewsets.GenericViewSet):
     queryset = Showroom.objects.all()
     serializer_class = ShowroomSerializer
+    filter_backends = (DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter)
+    filterset_class = ShowroomFilter
+    search_fields = ['cars']
+    ordering_fields = ['name', 'cars', 'location']
 
 
 class ShowroomDiscountViewSet(mixins.ListModelMixin,
@@ -68,6 +78,9 @@ class ProviderViewSet(mixins.ListModelMixin,
                     viewsets.GenericViewSet):
     queryset = Provider.objects.all()
     serializer_class = ProviderSerializer
+    filter_backends = [DjangoFilterBackend, filters.SearchFilter]
+    filterset_class = ProviderFilter
+    search_fields = ['cars']
 
 
 class ProviderDiscountViewSet(mixins.ListModelMixin,
