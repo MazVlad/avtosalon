@@ -32,6 +32,8 @@ router.register(r'provider_discount', ProviderDiscountViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('auth/', include('djoser.urls')),
+    path('auth/', include('djoser.urls.authtoken')),
     path('api/v1/', include(router.urls)),   # http://127.0.0.1:8000/api/v1/showroom/
     path('api/v1/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('api/v1/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
