@@ -68,9 +68,12 @@ class ShowroomDiscount(models.Model):
 
 class ShowroomHistory(models.Model):
     car = models.ForeignKey(Car, on_delete=models.CASCADE)
-    price = models.DecimalField(decimal_places=2, max_digits=6)
+    price = models.DecimalField(decimal_places=2, max_digits=10,default=0)
     showroom = models.ForeignKey(Showroom, on_delete=models.CASCADE)
     provider = models.ForeignKey('Provider', on_delete=models.CASCADE)
+
+    def __str__(self):
+        return str(self.car)
 
 
 class Customer(models.Model):
@@ -82,7 +85,7 @@ class Customer(models.Model):
     time_update = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return self.user
+        return str(self.user)
 
 
     class Meta:
@@ -94,6 +97,11 @@ class Customer(models.Model):
 class CustomerHistory(models.Model):
     customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
     showroom = models.ForeignKey(Showroom, on_delete=models.CASCADE)
+    price = models.DecimalField(decimal_places=2, max_digits=10,default=0)
+    car = models.ForeignKey(Car, on_delete=models.CASCADE, null=True)
+
+    def __str__(self):
+        return f'{self.customer},{self.price}'
 
 
 class Provider(models.Model):
@@ -117,4 +125,13 @@ class Provider(models.Model):
 
 class ProviderDiscount(models.Model):
     provider = models.ForeignKey(Provider, on_delete=models.CASCADE)
+
+
+class CustomerOrder(models.Model):
+    car = models.ForeignKey('Car', on_delete=models.CASCADE)
+    customer = models.ForeignKey('Customer', on_delete=models.CASCADE)
+    price = models.DecimalField(decimal_places=2, max_digits=10)
+
+    def __str__(self):
+        return f'{self.car}-{self.price}'
 

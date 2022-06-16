@@ -9,6 +9,9 @@ psycopg2-binary = "*"
 django-countries = "*"
 djangorestframework = "*"
 djangorestframework-simplejwt = "*"
+celery = "*"
+redis = "*"
+django-celery-beat = "*"
 
 [dev-packages]
 
