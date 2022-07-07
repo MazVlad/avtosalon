@@ -15,22 +15,13 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path,include
-from showroom.views import *
-from rest_framework import routers
 
-
-router = routers.DefaultRouter()
-router.register(r'car_manufacturer', CarManufacturerViewSet)
-router.register(r'cars', CarViewSet)
-router.register(r'showroom', ShowroomViewSet)
-router.register(r'showroom_discount', ShowroomDiscountViewSet)
-router.register(r'customer', CustomerViewSet)
-router.register(r'user', UserViewSet)
-router.register(r'provider', ProviderViewSet)
-router.register(r'provider_discount', ProviderDiscountViewSet)
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/v1/', include(router.urls)),   # http://127.0.0.1:8000/api/v1/showroom/
+    path(r'api/car/', include('car.urls')), #http://127.0.0.1:8000/api/car/
+    path(r'api/customer/', include('customer.urls')), #http://127.0.0.1:8000/api/customer/
+    path(r'api/provider/', include('provider.urls')), #http://127.0.0.1:8000/api/provider/
+    path('api/showroom/', include('showroom.urls')) # http://127.0.0.1:8000/api/showroom/
 ]
