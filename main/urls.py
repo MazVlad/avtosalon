@@ -15,15 +15,12 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path,include
-<<<<<<< HEAD
-=======
 from showroom.views import *
 from rest_framework import routers
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView, TokenVerifyView
 from .yasg import urlpatterns as doc_urls
 from . import settings
 
->>>>>>> origin/feature/swagger_debug
 
 
 

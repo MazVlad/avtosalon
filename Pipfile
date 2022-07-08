@@ -9,14 +9,10 @@ psycopg2-binary = "*"
 django-countries = "*"
 djangorestframework = "*"
 djangorestframework-simplejwt = "*"
-<<<<<<< HEAD
 django-environ = "*"
 python-dotenv = "*"
-
-=======
 drf-yasg = "*"
 django-debug-toolbar = "*"
->>>>>>> origin/feature/swagger_debug
 
 [dev-packages]
 
