@@ -8,12 +8,10 @@ django = "*"
 psycopg2-binary = "*"
 django-countries = "*"
 djangorestframework = "*"
-<<<<<<< HEAD
 djangorestframework-simplejwt = "*"
-=======
 django-environ = "*"
 python-dotenv = "*"
->>>>>>> feature/api
+
 
 [dev-packages]
 
