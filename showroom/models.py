@@ -1,60 +1,32 @@
 from django.db import models
 from django_countries.fields import CountryField
-from django.contrib.auth.models import User
-
-
-class CarManufacturer(models.Model):
-    name = models.CharField(max_length=100, unique=True)
-
-    def __str__(self):
-        return self.name
-
-
-class Car(models.Model):
-    CAR_TYPE_CHOICES = [
-        ('Sedan', 'Sedan'),
-        ('Coupe', 'Coupe'),
-        ('Crossover', 'Crossover'),
-        ('Hatchback','Hatchback'),
-        ('Minivan', 'Minivan'),
-    ]
-    manufacturer = models.ForeignKey(CarManufacturer, on_delete=models.CASCADE)
-    car_type = models.CharField(max_length=100, choices=CAR_TYPE_CHOICES,verbose_name="Вид авто")
-    model = models.CharField(max_length=150, verbose_name="Модель авто")
-    year = models.IntegerField(default=0,verbose_name="Год выпуска")
-    price = models.FloatField(verbose_name="Цена авто")
-    is_active = models.BooleanField(default=True)
-    time_create = models.DateTimeField(auto_now_add=True)
-    time_update = models.DateTimeField(auto_now=True)
-
-    def __str__(self):
-        return self.model
-
-
-    class Meta:
-        verbose_name = "Модель авто"
-        verbose_name_plural = "Модели авто"
-        ordering = ['-time_create', 'car_type']
+from car.models import Car
 
 
 class Showroom(models.Model):
+<<<<<<< HEAD
     name = models.CharField(max_length=100,verbose_name="Название салона")
     location = CountryField(verbose_name="Местоположение")
     balance = models.DecimalField(decimal_places=2, max_digits=6,verbose_name="Баланс автосалона",null=True)
+=======
+    name = models.CharField(max_length=100,verbose_name="Showroom name")
+    location = CountryField(verbose_name="Location")
+    balance = models.DecimalField(decimal_places=2, max_digits=6,verbose_name="Showroom balance",null=True)
+>>>>>>> feature/api
     cars = models.ManyToManyField(Car, blank=True)
-    customers = models.ManyToManyField('Customer', blank=True)
+    customers = models.ManyToManyField('customer.Customer', blank=True)
     is_active = models.BooleanField(default=True)
-    time_create = models.DateTimeField(auto_now_add=True)
-    time_update = models.DateTimeField(auto_now=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return self.name
 
 
     class Meta:
-        verbose_name = 'Салон'
-        verbose_name_plural = 'Салоны'
-        ordering = ['-time_create', 'name']
+        verbose_name = 'Showroom'
+        verbose_name_plural = 'Showrooms'
+        ordering = ['-created_at', 'name']
 
 
 class ShowroomDiscount(models.Model):
@@ -62,13 +34,14 @@ class ShowroomDiscount(models.Model):
     start_at = models.DateTimeField(auto_now_add=True)
     end_at = models.DateTimeField()
     percent = models.DecimalField(decimal_places=2, max_digits=4)
-    cars = models.ManyToManyField(Car)
-    showroom = models.ForeignKey(Showroom, on_delete=models.CASCADE)
+    cars = models.ManyToManyField('car.Car')
+    showroom = models.ForeignKey('Showroom', on_delete=models.CASCADE)
 
 
 class ShowroomHistory(models.Model):
-    car = models.ForeignKey(Car, on_delete=models.CASCADE)
+    car = models.ForeignKey('car.Car', on_delete=models.CASCADE)
     price = models.DecimalField(decimal_places=2, max_digits=6)
+<<<<<<< HEAD
     showroom = models.ForeignKey(Showroom, on_delete=models.CASCADE)
     provider = models.ForeignKey('Provider', on_delete=models.CASCADE)
 
@@ -114,7 +87,9 @@ class Provider(models.Model):
         verbose_name_plural = 'Поставщики'
         ordering = ['-time_create', 'name']
 
+=======
+    showroom = models.ForeignKey('showroom.Showroom', on_delete=models.CASCADE)
+    provider = models.ForeignKey('provider.Provider', on_delete=models.CASCADE)
+>>>>>>> feature/api
 
-class ProviderDiscount(models.Model):
-    provider = models.ForeignKey(Provider, on_delete=models.CASCADE)
 

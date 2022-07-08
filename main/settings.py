@@ -11,6 +11,10 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 from datetime import timedelta
 from pathlib import Path
+import os
+from dotenv import load_dotenv
+load_dotenv()
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -20,13 +24,14 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-xxsqnn24phh&n^u7^ypo6fz520shg^)t(d@00mvbr7lltiq86+'
+#SECRET_KEY = 'django-insecure-xxsqnn24phh&n^u7^ypo6fz520shg^)t(d@00mvbr7lltiq86+'
+SECRET_KEY = os.environ.get("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["*"]
-
+#ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = os.getenv("DJANGO_ALLOWED_HOSTS").split(" ")
 
 # Application definition
 
@@ -37,7 +42,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'showroom.apps.AvtosalonConfig',
+    'car',
+    'customer',
+    'provider',
+    'showroom',
     'django_countries',
     'rest_framework',
 ]
@@ -78,12 +86,12 @@ WSGI_APPLICATION = 'main.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'showroom_db',
-        'USER': 'postgres',
-        'PASSWORD': '123',
-        'HOST': '127.0.0.1',
-        'PORT': '5432',
+        'ENGINE': os.getenv('POSTGRES_ENGINE'),
+        'NAME': os.getenv('POSTGRES_DB'),
+        'USER': os.getenv('POSTGRES_USER'),
+        'PASSWORD': os.getenv('POSTGRES_PASSWORD'),
+        'HOST': 'localhost',
+        'PORT': os.getenv('POSTGRES_PORT'),
     }
 }
 

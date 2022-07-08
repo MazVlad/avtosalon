@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from rest_framework import viewsets,mixins
+<<<<<<< HEAD
 
 from showroom.models import *
 from showroom.seralizers import *
@@ -25,6 +26,14 @@ class CarViewSet(mixins.ListModelMixin,
     serializer_class = CarSerializer
 
 
+=======
+from showroom.models import Showroom,ShowroomDiscount
+from showroom.serializers import ShowroomSerializer,ShowroomDiscountSerializer
+
+
+
+
+>>>>>>> feature/api
 class ShowroomViewSet(mixins.ListModelMixin,
                     mixins.CreateModelMixin,
                     mixins.RetrieveModelMixin,
@@ -43,6 +52,7 @@ class ShowroomDiscountViewSet(mixins.ListModelMixin,
     serializer_class = ShowroomDiscountSerializer
 
 
+<<<<<<< HEAD
 class CustomerViewSet(mixins.ListModelMixin,
                     mixins.CreateModelMixin,
                     mixins.RetrieveModelMixin,
@@ -77,4 +87,8 @@ class ProviderDiscountViewSet(mixins.ListModelMixin,
                     viewsets.GenericViewSet):
     queryset = ProviderDiscount.objects.all()
     serializer_class = ProviderDiscountSerializer
+=======
+
+
+>>>>>>> feature/api
 

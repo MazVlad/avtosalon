@@ -15,6 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path,include
+<<<<<<< HEAD
 from showroom.views import *
 from rest_framework import routers
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView, TokenVerifyView
@@ -28,12 +29,22 @@ router.register(r'customer', CustomerViewSet)
 router.register(r'user', UserViewSet)
 router.register(r'provider', ProviderViewSet)
 router.register(r'provider_discount', ProviderDiscountViewSet)
+=======
+
+>>>>>>> feature/api
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+<<<<<<< HEAD
     path('api/v1/', include(router.urls)),   # http://127.0.0.1:8000/api/v1/showroom/
     path('api/v1/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('api/v1/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     path('api/v1/token/verify/', TokenVerifyView.as_view(), name='token_verify'),
+=======
+    path(r'api/car/', include('car.urls')), #http://127.0.0.1:8000/api/car/
+    path(r'api/customer/', include('customer.urls')), #http://127.0.0.1:8000/api/customer/
+    path(r'api/provider/', include('provider.urls')), #http://127.0.0.1:8000/api/provider/
+    path('api/showroom/', include('showroom.urls')) # http://127.0.0.1:8000/api/showroom/
+>>>>>>> feature/api
 ]
