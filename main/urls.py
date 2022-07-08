@@ -15,6 +15,15 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path,include
+<<<<<<< HEAD
+=======
+from showroom.views import *
+from rest_framework import routers
+from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView, TokenVerifyView
+from .yasg import urlpatterns as doc_urls
+from . import settings
+
+>>>>>>> origin/feature/swagger_debug
 
 
 
@@ -26,3 +35,13 @@ urlpatterns = [
     path(r'api/provider/', include('provider.urls')), #http://127.0.0.1:8000/api/provider/
     path('api/showroom/', include('showroom.urls')) # http://127.0.0.1:8000/api/showroom/
 ]
+
+urlpatterns += doc_urls
+
+
+if settings.DEBUG:
+    import debug_toolbar
+
+    urlpatterns = [
+                      path('__debug__/', include(debug_toolbar.urls)),
+                  ] + urlpatterns

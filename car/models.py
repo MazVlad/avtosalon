@@ -14,13 +14,13 @@ class Car(models.Model):
         ('Crossover', 'Crossover'),
         ('Hatchback','Hatchback'),
         ('Minivan', 'Minivan'),
-    ]
+    ] # core
     manufacturer = models.ForeignKey(CarManufacturer, on_delete=models.CASCADE)
     car_type = models.CharField(max_length=100, choices=CAR_TYPE_CHOICES,verbose_name="Car type")
     model = models.CharField(max_length=150, verbose_name="Model")
-    year = models.IntegerField(default=0,verbose_name="Year of release")
-    price = models.FloatField(verbose_name="Car price")
-    is_active = models.BooleanField(default=True)
+    year = models.IntegerField(default=0,verbose_name="Year of release") # 1900+
+    price = models.FloatField(verbose_name="Car price")# positive
+    is_active = models.BooleanField(default=True) # abs
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 

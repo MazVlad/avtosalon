@@ -6,8 +6,8 @@ from car.models import Car
 class Showroom(models.Model):
     name = models.CharField(max_length=100,verbose_name="Showroom name")
     location = CountryField(verbose_name="Location")
-    balance = models.DecimalField(decimal_places=2, max_digits=6,verbose_name="Showroom balance",null=True)
-    cars = models.ManyToManyField(Car, blank=True)
+    balance = models.DecimalField(decimal_places=2, max_digits=6,verbose_name="Showroom balance", null=True)
+    cars = models.ManyToManyField(Car, blank=True) # 3 table
     customers = models.ManyToManyField('customer.Customer', blank=True)
     is_active = models.BooleanField(default=True)
     created_at = models.DateTimeField(auto_now_add=True)
@@ -28,7 +28,7 @@ class ShowroomDiscount(models.Model):
     start_at = models.DateTimeField(auto_now_add=True)
     end_at = models.DateTimeField()
     percent = models.DecimalField(decimal_places=2, max_digits=4)
-    cars = models.ManyToManyField('car.Car')
+    cars = models.ManyToManyField('car.Car') # fk
     showroom = models.ForeignKey('Showroom', on_delete=models.CASCADE)
 
 
