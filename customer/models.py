@@ -22,3 +22,12 @@ class Customer(models.Model):
 class CustomerHistory(models.Model):
     customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
     showroom = models.ForeignKey('showroom.Showroom', on_delete=models.CASCADE)
+
+
+class CustomerOrder(models.Model):
+    car = models.ForeignKey('Car', on_delete=models.CASCADE)
+    customer = models.ForeignKey('Customer', on_delete=models.CASCADE)
+    price = models.DecimalField(decimal_places=2, max_digits=10)
+
+    def __str__(self):
+        return f'{self.car}-{self.price}'

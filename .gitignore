@@ -130,3 +130,6 @@ dmypy.json
 
 .idea
 /.idea
+/.idea/
+**/__pycache__
+/celerybeat-schedule

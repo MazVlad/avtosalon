@@ -37,3 +37,7 @@ class ShowroomHistory(models.Model):
     price = models.DecimalField(decimal_places=2, max_digits=6)
     showroom = models.ForeignKey('showroom.Showroom', on_delete=models.CASCADE)
     provider = models.ForeignKey('provider.Provider', on_delete=models.CASCADE)
+
+
+    def __str__(self):
+        return str(self.car)
