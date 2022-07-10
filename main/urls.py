@@ -30,7 +30,12 @@ urlpatterns = [
     path(r'api/car/', include('car.urls')), #http://127.0.0.1:8000/api/car/
     path(r'api/customer/', include('customer.urls')), #http://127.0.0.1:8000/api/customer/
     path(r'api/provider/', include('provider.urls')), #http://127.0.0.1:8000/api/provider/
-    path('api/showroom/', include('showroom.urls')) # http://127.0.0.1:8000/api/showroom/
+    path('api/showroom/', include('showroom.urls')),# http://127.0.0.1:8000/api/showroom/
+    path('auth/', include('djoser.urls')),
+    path('auth/', include('djoser.urls.authtoken')),
+    path('api/v1/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('api/v1/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
+    path('api/v1/token/verify/', TokenVerifyView.as_view(), name='token_verify'),
 ]
 
 urlpatterns += doc_urls
