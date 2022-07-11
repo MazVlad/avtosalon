@@ -1,11 +1,6 @@
-from rest_framework import viewsets,mixins
+from rest_framework import viewsets,mixins,filters
 from showroom.models import Showroom,ShowroomDiscount
 from showroom.serializers import ShowroomSerializer,ShowroomDiscountSerializer
-from django.shortcuts import render
-from rest_framework import viewsets,mixins,filters
-
-from showroom.models import *
-from showroom.serializers import *
 from django_filters.rest_framework import DjangoFilterBackend
 from showroom.services import ShowroomFilter
 

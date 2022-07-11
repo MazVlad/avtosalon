@@ -1,4 +1,8 @@
+from decimal import Decimal
 from django.db import models
+from core.enums.car import CarType
+from core.models import abstract_models
+from django.core.validators import MaxValueValidator, MinValueValidator
 
 class CarManufacturer(models.Model):
     name = models.CharField(max_length=100, unique=True)
@@ -7,22 +11,14 @@ class CarManufacturer(models.Model):
         return self.name
 
 
-class Car(models.Model):
-    CAR_TYPE_CHOICES = [
-        ('Sedan', 'Sedan'),
-        ('Coupe', 'Coupe'),
-        ('Crossover', 'Crossover'),
-        ('Hatchback','Hatchback'),
-        ('Minivan', 'Minivan'),
-    ] # core
-    manufacturer = models.ForeignKey(CarManufacturer, on_delete=models.CASCADE)
-    car_type = models.CharField(max_length=100, choices=CAR_TYPE_CHOICES,verbose_name="Car type")
+class Car(abstract_models.Abstract):
+    manufacturer = models.ForeignKey(CarManufacturer,null=True, on_delete=models.SET_NULL)
+    car_type = models.CharField(max_length=100,verbose_name="Car type", choices=CarType.choices())
     model = models.CharField(max_length=150, verbose_name="Model")
-    year = models.IntegerField(default=0,verbose_name="Year of release") # 1900+
-    price = models.FloatField(verbose_name="Car price")# positive
-    is_active = models.BooleanField(default=True) # abs
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
+    year = models.IntegerField(default=0,verbose_name="Year of release",validators=[MinValueValidator(1900),
+                                       MaxValueValidator(2022)])
+    price = models.DecimalField(decimal_places=2, max_digits=10,verbose_name="Car price",validators=[MinValueValidator(Decimal('0.01'))])
+
 
     def __str__(self):
         return self.model
