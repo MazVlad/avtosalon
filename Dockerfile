@@ -1,9 +1,9 @@
 FROM python:3.8
 
-WORKDIR /traine
+WORKDIR .
 
 EXPOSE 8000
 
 COPY . .
 
-RUN pipenv install
+RUN pip install pipenv && pipenv install --deploy --system
