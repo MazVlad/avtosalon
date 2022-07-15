@@ -1,13 +1,22 @@
-import enum
+from core.enums.base_enum import BaseEnum
 
 
-class CarType(enum.Enum):
-    SEDAN = 'Sedan'
-    COUPE = 'Coupe'
-    CROSSOVER = 'Crossover'
-    HATCHBACK = 'Hatchback'
-    MINIVAN = 'Minivan'
+class CarType(BaseEnum):
+    SEDAN = "Sedan"
+    COUPE = "Coupe"
+    CROSSOVER = "Crossover"
+    HATCHBACK = "Hatchback"
+    MINIVAN = "Minivan"
 
-    @classmethod
-    def choices(cls):
-        return tuple((i.name, i.value) for i in cls)
+
+class Color(BaseEnum):
+    RED = "Red"
+    ORANGE = "Orange"
+    YELLOW = "Yellow"
+    GREEN = "Green"
+    BLUE = "Blue"
+    PURPLE = "Purple"
+    PINK = "Pink"
+    BLACK = "Black"
+    WHITE = "White"
+    GRAY = "Gray"

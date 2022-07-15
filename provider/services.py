@@ -5,4 +5,4 @@ from provider.models import Provider
 class ProviderFilter(filters.FilterSet):
     class Meta:
         model = Provider
-        fields = ['name','cars','year_of_foundation']
+        fields = ["name", "cars", "year_of_foundation"]

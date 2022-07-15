@@ -1,6 +1,12 @@
 from django.contrib import admin
-from provider.models import Provider,ProviderDiscount
+from provider.models import Provider, ProviderDiscount
 
 
-admin.site.register(Provider)
-admin.site.register(ProviderDiscount)
+@admin.register(Provider)
+class ProviderAdmin(admin.ModelAdmin):
+    list_display = ("name", "year_of_foundation")
+
+
+@admin.register(ProviderDiscount)
+class ProviderDiscountAdmin(admin.ModelAdmin):
+    list_display = ["provider"]

@@ -5,11 +5,4 @@ from showroom.models import Showroom
 class ShowroomFilter(filters.FilterSet):
     class Meta:
         model = Showroom
-        fields = ['name','location','cars']
-
-
-
-
-
-
-
+        fields = ["name", "location", "cars"]
