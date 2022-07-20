@@ -2,6 +2,7 @@ from django.db import models
 from django.core.validators import MaxValueValidator, MinValueValidator
 from src.core.models import BaseModel
 from src.car.models import Car
+from src.showroom.models import Showroom
 from src.showroom.models import jsonfield_default_value
 
 
@@ -25,6 +26,21 @@ class Customer(BaseModel):
         verbose_name = "Customer"
         verbose_name_plural = "Customers"
         ordering = ["-created_at", "name"]
+
+
+class CustomerBuyCar(BaseModel):
+    """customer buying a car from a showroom"""
+
+    count = models.PositiveIntegerField(default=1)
+    customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
+    car = models.ForeignKey(Car, on_delete=models.SET_NULL, null=True)
+    showroom = models.ForeignKey(Showroom, on_delete=models.SET_NULL, null=True)
+    discount = models.IntegerField(
+        validators=(
+            MinValueValidator(0),
+            MaxValueValidator(100),
+        )
+    )
 
 
 class CustomerHistory(BaseModel):

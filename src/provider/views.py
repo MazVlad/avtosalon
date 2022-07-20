@@ -31,4 +31,7 @@ class ProviderDiscountViewSet(
 ):
     queryset = ProviderDiscount.objects.all()
     serializer_class = ProviderDiscountSerializer
-    permission_classes = (permissions.IsAuthenticated,IsOwnerOrReadOnly,)
+    permission_classes = (
+        permissions.IsAuthenticated,
+        IsOwnerOrReadOnly,
+    )

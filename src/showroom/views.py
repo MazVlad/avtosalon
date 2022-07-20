@@ -23,7 +23,11 @@ class ShowroomViewSet(
     )
     filterset_class = ShowroomFilter
     search_fields = ("cars",)
-    ordering_fields = ("name", "cars", "location",)
+    ordering_fields = (
+        "name",
+        "cars",
+        "location",
+    )
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
 
 
@@ -36,4 +40,7 @@ class ShowroomDiscountViewSet(
 ):
     queryset = ShowroomDiscount.objects.all()
     serializer_class = ShowroomDiscountSerializer
-    permission_classes = (permissions.IsAuthenticated,IsOwnerOrReadOnly,)
+    permission_classes = (
+        permissions.IsAuthenticated,
+        IsOwnerOrReadOnly,
+    )

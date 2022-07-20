@@ -14,4 +14,7 @@ class CustomerViewSet(
 ):
     queryset = Customer.objects.all()
     serializer_class = CustomerSerializer
-    permission_classes = (permissions.IsAuthenticated,IsOwnerOrReadOnly,)
+    permission_classes = (
+        permissions.IsAuthenticated,
+        IsOwnerOrReadOnly,
+    )

@@ -22,5 +22,8 @@ class CarViewSet(
     )
     filterset_class = CarFilter
     search_fields = ("car_type",)
-    ordering_fields = ("car_type", "manufacturer",)
+    ordering_fields = (
+        "car_type",
+        "manufacturer",
+    )
     permission_classes = (permissions.IsAuthenticated,)
